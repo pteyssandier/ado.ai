@@ -2,7 +2,7 @@ import argparse
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, UTC
 
 
 TASKS_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "tasks.json")
@@ -29,7 +29,7 @@ def add_task(text, path=TASKS_FILE):
         "id": (tasks[-1]["id"] + 1) if tasks else 1,
         "text": text,
         "done": False,
-        "created_at": datetime.utcnow().isoformat() + "Z",
+        "created_at": datetime.now(UTC).isoformat(),
     }
     tasks.append(task)
     save_tasks(tasks, path)
